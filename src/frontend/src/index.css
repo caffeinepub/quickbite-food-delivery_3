@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Food Delivery – Vivid Red + Orange on White */
+    --background: 1 0 0;
+    --foreground: 0.15 0.02 240;
+
+    --card: 1 0 0;
+    --card-foreground: 0.15 0.02 240;
+
+    --popover: 1 0 0;
+    --popover-foreground: 0.15 0.02 240;
+
+    --primary: 0.53 0.22 25;
+    --primary-foreground: 1 0 0;
+
+    --secondary: 0.96 0.01 60;
+    --secondary-foreground: 0.15 0.02 240;
+
+    --muted: 0.96 0.01 60;
+    --muted-foreground: 0.5 0.02 240;
+
+    --accent: 0.65 0.2 50;
+    --accent-foreground: 1 0 0;
+
+    --destructive: 0.53 0.22 25;
+    --destructive-foreground: 1 0 0;
+
+    --success: 0.55 0.16 145;
+    --success-foreground: 1 0 0;
+
+    --border: 0.9 0.01 60;
+    --input: 0.9 0.01 60;
+    --ring: 0.53 0.22 25;
+
+    --chart-1: 0.53 0.22 25;
+    --chart-2: 0.65 0.2 50;
+    --chart-3: 0.55 0.16 145;
+    --chart-4: 0.55 0.14 230;
+    --chart-5: 0.65 0.15 290;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-food hover:-translate-y-0.5;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:opacity-90 transition-opacity;
+  }
+
+  .gradient-hero {
+    background: linear-gradient(
+      135deg,
+      oklch(0.53 0.22 25 / 0.92) 0%,
+      oklch(0.65 0.2 50 / 0.88) 100%
+    );
+  }
+
+  .rating-star {
+    color: oklch(0.75 0.18 80);
+  }
+}
