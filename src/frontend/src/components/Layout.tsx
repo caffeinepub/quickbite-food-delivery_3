@@ -17,10 +17,13 @@ import {
   User,
   UtensilsCrossed,
 } from "lucide-react";
+import { useState } from "react";
 import { useApp } from "../context/AppContext";
 import AuthModal from "./AuthModal";
 import CartSidebar from "./CartSidebar";
 import CheckoutModal from "./CheckoutModal";
+
+const CITIES = ["Lucknow", "Raebareli", "Ayodhya", "Gonda"];
 
 export default function Layout() {
   const {
@@ -32,6 +35,7 @@ export default function Layout() {
     isAdminLoggedIn,
   } = useApp();
   const navigate = useNavigate();
+  const [selectedCity, setSelectedCity] = useState("Lucknow");
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -50,14 +54,34 @@ export default function Layout() {
             </span>
           </Link>
 
-          <button
-            type="button"
-            className="hidden md:flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground bg-muted rounded-full px-3 py-1.5 transition-colors"
-          >
-            <MapPin className="w-3.5 h-3.5 text-primary" />
-            <span>San Jose, CA</span>
-            <ChevronDown className="w-3 h-3" />
-          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                className="hidden md:flex items-center gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground bg-muted rounded-full px-3 py-1.5 transition-colors"
+                data-ocid="nav.dropdown_menu"
+              >
+                <MapPin className="w-3.5 h-3.5 text-primary" />
+                <span>{selectedCity}, UP</span>
+                <ChevronDown className="w-3 h-3" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-44">
+              {CITIES.map((city) => (
+                <DropdownMenuItem
+                  key={city}
+                  onClick={() => setSelectedCity(city)}
+                  className={
+                    selectedCity === city ? "font-semibold text-primary" : ""
+                  }
+                  data-ocid="nav.link"
+                >
+                  <MapPin className="w-3.5 h-3.5 mr-2" />
+                  {city}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <div className="flex items-center gap-2">
             <Button
@@ -150,7 +174,7 @@ export default function Layout() {
                 </span>
               </div>
               <p className="text-sm leading-relaxed">
-                Delivering happiness one meal at a time, across the US.
+                Delivering happiness one meal at a time, across Uttar Pradesh.
               </p>
             </div>
             <div>
@@ -189,9 +213,7 @@ export default function Layout() {
             </div>
             <div>
               <h4 className="font-semibold text-white mb-3 text-sm">Serving</h4>
-              <p className="text-sm">
-                San Jose · San Francisco · Oakland · Austin · Chicago · Seattle
-              </p>
+              <p className="text-sm">Lucknow · Raebareli · Ayodhya · Gonda</p>
             </div>
           </div>
           <div className="border-t border-white/10 pt-6 text-center text-xs">
